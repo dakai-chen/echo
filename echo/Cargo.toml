@@ -1,0 +1,39 @@
+[package]
+name = "echo"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+default = ["macros", "server"]
+macros = ["echo-macros"]
+server = [
+    "hyper/server",
+    "hyper/http1",
+    "tokio/rt",
+    "tokio/net",
+    "tokio/time",
+    "tokio/macros",
+]
+multipart = ["multer"]
+sse = ["tokio/time"]
+ws = ["hyper", "tokio/rt", "tokio-tungstenite", "sha1", "base64"]
+
+[dependencies]
+echo-core = { path = "../echo-core", version = "0.1.0" }
+echo-macros = { path = "../echo-macros", version = "0.1.0", optional = true }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_urlencoded = "0.7"
+matchit = "0.7"
+sync_wrapper = "0.1"
+futures-util = "0.3"
+pin-project-lite = "0.2"
+mime = "0.3"
+multer = { version = "2", optional = true }
+hyper = { version = "1.0.0-rc.2", optional = true }
+tokio = { version = "1", optional = true }
+tokio-tungstenite = { version = "0.18", optional = true }
+sha1 = { version = "0.10", optional = true }
+base64 = { version = "0.21", optional = true }
